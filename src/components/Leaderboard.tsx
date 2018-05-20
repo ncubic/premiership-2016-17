@@ -1,4 +1,6 @@
 import * as React from 'react';
+import * as FontAwesome from 'react-fontawesome';
+import * as ReactTooltip from 'react-tooltip'
 import {ILeaderboardEntry} from '../data/Store'
 
 /**
@@ -9,10 +11,36 @@ interface ILeaderboardProps {
 }
 
 /**
+ * Renders a header for Leaderboard table.
+ *
+ */
+function LeaderboardHeader() {
+	return (
+		<tr>
+			<th>Rank</th>
+			<th>Name</th>
+			<th>Played</th>
+			<th>Won</th>
+			<th>Draw</th>
+			<th>Lost</th>
+			<th>GF<FontAwesome data-tip="Goals for" name="question" /></th>
+			<th>GA<FontAwesome data-tip="Goals against" name="question" /></th>
+			<th>GD<FontAwesome data-tip="Goal difference" name="question" /></th>
+			<th>Points</th>
+			<th>Trend</th>
+		</tr>
+	)
+}
+
+/**
  * Component renders a leaderboard with all clubs ranked in a table.
  */
 class Leaderboard extends React.Component<ILeaderboardProps, object> {
 	public render() {
+		if (this.props.ranking === undefined) {
+			throw Error("Missing ranking data.");
+		}
+
 		const items = this.props.ranking.map((club) =>
 			<tr key={club.name}>
 				<td>{club.order}</td>
@@ -32,26 +60,17 @@ class Leaderboard extends React.Component<ILeaderboardProps, object> {
 		return (
 			<div>
 				<h2>Leaderboard</h2>
-				<table>
-					<thead>
-						<tr>
-							<th>Rank</th>
-							<th>Name</th>
-							<th>Played</th>
-							<th>Won</th>
-							<th>Draw</th>
-							<th>Lost</th>
-							<th>Goals scored</th>
-							<th>Goals received</th>
-							<th>Goal difference</th>
-							<th>Points</th>
-							<th>Trend</th>
-						</tr>
-					</thead>
-					<tbody>
-						{items}
-					</tbody>
-				</table>
+				<div className="table-responsive">
+					<table className="table table-hover table-sm">
+						<thead>
+							<LeaderboardHeader />
+						</thead>
+						<tbody>
+							{items}
+						</tbody>
+					</table>
+				</div>
+				<ReactTooltip />
 			</div>
 		)
 	}

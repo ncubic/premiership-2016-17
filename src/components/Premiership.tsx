@@ -39,10 +39,21 @@ class Premiership extends React.Component<object, IPremierShipState> {
 	public render() {
 		return (
 			<div>
-				<h1>Premiership 2016/17</h1>
-				<RoundSelect rounds={this.rounds} selected={this.state.round} handler={this.handleRoundChange} />
-				<RoundResults games={this.store.getGames(this.state.round)}/>
-				<Leaderboard ranking={this.store.getRanking(this.state.round)}/>
+				<div className="page-header">
+					<h1>Premiership 2016/17</h1>
+				</div>
+				<div className="container">
+					<RoundSelect rounds={this.rounds} selected={this.state.round} handler={this.handleRoundChange} />
+					<p>Results after round {this.state.round}</p>
+					<div className="row">
+						<div className="col-lg-8 col-md-12">
+							<Leaderboard ranking={this.store.getRanking(this.state.round)}/>
+						</div>
+						<div className="col-lg-4 col-md-12">
+							<RoundResults games={this.store.getGames(this.state.round)}/>
+						</div>
+					</div>
+				</div>
 			</div>
 		);
 	}

@@ -1,5 +1,36 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.match {
+	border: 1px solid #ddd;
+	margin: 0 10px 10px 0px;
+	float: left;
+	border-radius: 5px;
+}
+
+.score {
+	text-align: right;
+}
+
+.highlight {
+	font-weight: bold;
+}
+
+.page-header {
+	height: 100px;
+  background-color: #38003c;
+  color: white;
+  text-align: center;
+}
+
+.page-header h1 {
+	padding-top: 20px;
+}
+
+.round-select {
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
